@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <div id="header">
+    <div id="logo">
+      <img src="assets/educatorbox.png" routerLink="/home">
+    </div>
+    <div id="btn_area">
+      <button mat-button [routerLink]="['institutelogin']">Login</button>
+    </div>
+  </div>
+  <div id="slider">
+    <div id="slider_content">
+      <h2>Integrated Digital Coaching Management System</h2>
+      <p>Educator Box – All-in-one paper less solution for your institute.</p>
+      <button mat-button (click)="demo_func()">Try Educator Box</button>
+    </div>
+    <div id="slider_img">
+      <img src="assets/img.jpg">
+    </div>
+  </div>
+
+  <div id="choose_us" hidden>
+    <strong>Why Should Choose Educator Box?</strong>
+    <div id="choose_content">
+      many good reasons to choose Educator Box.
+      Enquiry Management where students get in touch through mail or WhatsApp.
+      Student Management where you manage student data.
+      Staff Management where you access staff details and salary.
+      Fee management where you easily manage Fee payment as well as Dues.
+      Online Exam from where you take online examination, Quiz, Test series and many more. They features will help to
+      track student growth.
+      Study Material where student easily get study material which will be uploaded by you.
+      Expense Management where you easily track your revenue on a single click that will help you to growth of your
+      business.
+      Enhancing the brand name , they will give the students in the market a strong digital presence.
+      Course management, you can easily manage your different courses for different student.
+      Cost effective, the institutes can save money on paper work and other expenses because everything is automated and
+      computerized.
+      Time saving, this is automated software so they will help to minimize paper work
+      Like admission, question paper, study material and other complex duties.
+    </div>
+  </div>
+
+  <div id="contact">
+    <div class="contact_form_img">
+      <img src="assets/contact.png">
+    </div>
+    <div class="contact_form">
+      <h4>Enquiry</h4>
+      <form [formGroup]="contactForm">
+        <mat-form-field appearance="fill" id="top_input">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="enter your name" formControlName="enq_name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email-Id</mat-label>
+          <input type="email" matInput placeholder="enter your email" formControlName="enq_email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>WhatsApp Number</mat-label>
+          <input matInput type="number" placeholder="enter your whatsapp number" formControlName="enq_phone"
+            onkeypress=" return this.value.length < 10">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Message...</mat-label>
+          <textarea matInput type="Number" placeholder="enter your message" formControlName="enq_msg"></textarea>
+        </mat-form-field>
+
+        <input type="number" readonly [ngModel]="admin" formControlName="admin_id_fk" hidden>
+
+      </form><br>
+
+      <div class="submit">
+        <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+        <button mat-raised-button color="primary" [disabled]="!contactForm.valid" (click)="sendmsg()">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div id="contact2">
+    <div class="contact_form_img">
+      <img src="assets/quiz_img.png">
+    </div>
+    <div class="contact_form">
+      <h4>Contact Us</h4>
+      <a href="https://goo.gl/maps/whC8fxTPBL6QHVBE7">
+        <div class="my_info">
+          <mat-icon class="maticon">place</mat-icon>Yadav Complex Infront of Carnival
+          (Navin Cinema Hall) Hajipur, Vaishali, Bihar.
+        </div>
+      </a>
+      <a href="tel:9661647172">
+        <div class="my_info">
+          <mat-icon class="maticon">phone_in_talk</mat-icon>9661647172
+        </div>
+      </a>
+      <a href="https://wa.me/message/6GZQIHUTKUGCB1" data-action="share/whatsapp/share">
+        <div class="my_info">
+          <mat-icon class="maticon"><img src="/assets/whatshapp.png"
+              style="width: 30px; height: 30px; margin-bottom: 14px;"></mat-icon>9470407608
+        </div>
+      </a>
+      <a href="mailto:tech@educatorbox.com">
+        <div class="my_info">
+          <mat-icon class="maticon">email</mat-icon>tech@educatorbox.com
+        </div>
+      </a>
+      <a href="mailto:support@educatorbox.com">
+        <div class="my_info">
+          <mat-icon class="maticon">email</mat-icon>support@educatorbox.com
+        </div>
+      </a>
+      <a href="mailto:enquiry@educatorbox.com">
+        <div class="my_info">
+          <mat-icon class="maticon">email</mat-icon>enquiry@educatorbox.com
+        </div>
+      </a>
+
+    </div>
+  </div>
+  <div id="footer">
+    <a href="https://greensoft.net.in" target="_blank">Powered By : Green Soft</a>
+    <span>Version 1.0</span>
+  </div>
+</div>

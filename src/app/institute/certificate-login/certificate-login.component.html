@@ -1,0 +1,45 @@
+<div id="wrapper">
+    <div id="login_box">
+
+    <form [formGroup]="inst_login_form">
+        <div class="txt_box_with_icon">
+            <mat-icon>account_circle</mat-icon>
+            <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Enter your E-mail" formControlName="username">
+            </mat-form-field>
+        </div>
+        <br>
+        <div class="txt_box_with_icon">
+            <mat-icon>lock</mat-icon>
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input (keyup.enter)="inst_login()" matInput [type]="hide ? 'password' : 'text'"
+                    placeholder="Enter your password" formControlName="inst_password"
+                    onkeypress=" return this.value.length < 20">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide" >
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </form>
+    <br>
+    <button mat-button mat-raised-button color="primary" (click)="inst_login()">
+        Login Now 
+    </button><br>
+    
+    
+    <div *ngIf="!sendotp" class="otpBOX">
+    <mat-form-field class="example-full-width">
+        <mat-label>OTP</mat-label>
+        <input matInput placeholder="Enter OTP E-mail"  maxlength="6" #otp >
+    </mat-form-field>
+    <br>
+    <button mat-button mat-raised-button color="primary" (click)="Verify(otp.value)">
+         Verify
+    </button><br>
+</div>
+
+    </div>
+</div>
