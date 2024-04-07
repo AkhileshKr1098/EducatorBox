@@ -15,7 +15,7 @@ import { ConfirmBoxComponent } from '../confirm-box/confirm-box.component';
 })
 export class CertificateComponent implements OnInit {
 
-  displayedColumns: string[] = ['no', 'std_name', 'std_image','std_father_name', 'std_contact_no', 'std_village','course_id_fk','std_center_code', 'std_rigistration_no',  'std_total_marks', 'action'];
+  displayedColumns: string[] = ['no', 'std_name', 'std_image', 'std_father_name', 'std_contact_no', 'std_village', 'course_id_fk', 'std_center_code', 'std_rigistration_no', 'std_total_marks', 'action'];
   dataSource = new MatTableDataSource();
   count_notification: number = 0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,7 +26,7 @@ export class CertificateComponent implements OnInit {
   login: any
   login_deatils: any
   deletevalue: any = 1
-
+  isLogin: any
   constructor(
     private service: ManageService,
     private popup: NgToastService,
@@ -43,17 +43,24 @@ export class CertificateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.certificateLogin.subscribe(
-      (res:any)=>{
-        console.log(res);
-          if(res == false){
-            this.router.navigate(['/institutehome/certificateLogin'])
-            return
-          }
-      }
-    )
+    // this.service.certificateLogin.subscribe(
+    //   (res:any)=>{
+    //     console.log(res);
+    //       if(res == false){
+    //         this.router.navigate(['/institutehome/certificateLogin'])
+    //         return
+    //       }
+    //   }
+    // )
 
-    
+    this.isLogin = localStorage.getItem('isCertificateLogin')
+    console.log(this.isLogin);
+    if (this.isLogin !== 'True') {
+      this.router.navigate(['/institutehome/certificateLogin'])
+      return
+    }
+
+
     const fromdata = new FormData()
     fromdata.append('inst_id', this.inst_id)
     this.service.get_certificate_by_inst_id(fromdata).subscribe(

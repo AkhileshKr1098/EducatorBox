@@ -72,9 +72,11 @@ export class InstituteHomeComponent implements OnInit {
       disableClose: true
     });
   }
+  
   logout(){
     this.router.navigate(['institutelogin'])
     localStorage.clear()
+    
   }
 
   ngAfterContentChecked(){

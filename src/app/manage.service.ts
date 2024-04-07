@@ -11,7 +11,7 @@ export class ManageService {
   ) { }
 
 loginValid = new BehaviorSubject(false)
-certificateLogin = new BehaviorSubject(false)
+// certificateLogin = new BehaviorSubject(false)
 
   baseUrl: string = 'https://educatorbox.com/api/';
 

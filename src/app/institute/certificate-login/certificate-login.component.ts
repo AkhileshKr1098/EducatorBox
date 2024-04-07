@@ -16,6 +16,10 @@ export class CertificateLoginComponent implements OnInit {
   sendotp: boolean = true
   inst_login_form !: FormGroup
   send_otp: any
+
+  login: any
+  login_data: any
+  isLogin:any
   constructor(
     private popup: NgToastService,
     private FromBuilder: FormBuilder,
@@ -31,6 +35,16 @@ export class CertificateLoginComponent implements OnInit {
       otp: [''],
     })
 
+    this.login = localStorage.getItem('Token')
+    this.login_data = JSON.parse(this.login)
+    console.log(this.login_data.inst_email);
+
+    this.isLogin = localStorage.getItem('isCertificateLogin')
+    console.log(this.isLogin);
+    if (this.isLogin == 'True') {
+      this.router.navigate(['/institutehome/certificate'])
+      return
+    }
   }
 
   inst_login() {
@@ -38,7 +52,15 @@ export class CertificateLoginComponent implements OnInit {
       this.service.inst_login(this.inst_login_form.value).subscribe(
         (res: any) => {
           if (res.success) {
-            this.sendOTP()
+            
+            if (this.login_data.inst_email === this.inst_login_form.get('username')?.value) {
+              this.sendOTP()
+
+            } else {
+              this.popup.error({ detail: 'Failed', summary: 'This username is not match your current login' })
+              return
+            }
+
             // this.popup.success({ detail: 'Success', summary: 'OTP send successfully ...', })
           }
           else {
@@ -80,7 +102,7 @@ export class CertificateLoginComponent implements OnInit {
   Verify(data: any) {
     if (this.send_otp == data) {
       this.router.navigate(['/institutehome/certificate']);
-      this.service.certificateLogin.next(true)
+      localStorage.setItem('isCertificateLogin', 'True')
     } else {
       alert("Invalid OTP")
     }
