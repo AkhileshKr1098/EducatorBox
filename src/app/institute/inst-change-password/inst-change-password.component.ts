@@ -107,6 +107,8 @@ export class InstChangePasswordComponent implements OnInit {
         console.log(res)
         this.popup.success({ detail: 'Success', summary: 'Password Change Sucessfully...', })
         this.matref.close()
+        this.router.navigate(['institutelogin'])
+        localStorage.clear()
       }
     )
 

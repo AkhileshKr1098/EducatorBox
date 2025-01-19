@@ -66,6 +66,12 @@ import { EmployeeDashboardComponent } from './employee/employee-dashboard/employ
 import { HomeEnquiryComponent } from './admin/home-enquiry/home-enquiry.component';
 import { LiveClassComponent } from './institute/live-class/live-class.component';
 import { CertificateLoginComponent } from './institute/certificate-login/certificate-login.component';
+import { WalletHistoryComponent } from './institute/Payment/wallet-history/wallet-history.component';
+import { WalletPayComponent } from './institute/Payment/wallet-pay/wallet-pay.component';
+import { AddMoneyRequestComponent } from './institute/Payment/add-money-request/add-money-request.component';
+import { AddMoneyComponent } from './institute/Payment/add-money/add-money.component';
+import { PaymentTransactionPresentInstComponent } from './institute/Payment/payment-transaction-present-inst/payment-transaction-present-inst.component';
+import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -135,7 +141,7 @@ const routes: Routes = [
         path: 'batch', component: ViewportComponent,
         children: [
           { path: '', component: BatchComponent },
-          { path: 'studentbatch', component: StdbathcbyComponent},
+          { path: 'studentbatch', component: StdbathcbyComponent },
         ]
 
       },
@@ -166,8 +172,18 @@ const routes: Routes = [
       { path: 'block', component: BlockComponent },
       { path: 'panchayat', component: PanchayatComponent },
       { path: 'ward', component: WardComponent },
-      {path: 'liveclass', component:LiveClassComponent},
-      {path:'certificateLogin', component:CertificateLoginComponent}
+      { path: 'liveclass', component: LiveClassComponent },
+      { path: 'certificateLogin', component: CertificateLoginComponent },
+
+      // for payment  working area
+
+      { path: 'walletHistory', component: WalletHistoryComponent },
+      { path: 'walletPay', component: WalletPayComponent },
+      { path: 'addmoneyreq', component: AddMoneyRequestComponent },
+      { path: 'addmoney', component: AddMoneyComponent },
+      { path: 'paymenttransactionlist', component: PaymentTransactionPresentInstComponent },
+      { path: 'centerlist', component: CenterListComponent }
+
     ]
   },
 
@@ -195,7 +211,7 @@ const routes: Routes = [
       { path: 'instquestionbank', component: InstQuestionBankComponent },
       { path: 'quizdashboard', component: QuizDashboardComponent },
       { path: 'quizresult', component: QuizresultComponent },
-      {path: 'liveclass', component:LiveClassComponent}
+      { path: 'liveclass', component: LiveClassComponent }
 
     ]
   },

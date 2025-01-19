@@ -107,6 +107,7 @@ export class CertificateComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }
 
 

@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./institute-home.component.css']
 })
 export class InstituteHomeComponent implements OnInit {
-  center_code:any;
+  center_code: any;
   name: any;
-  center:any;
+  center: any;
   opened: boolean = true
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -23,11 +23,11 @@ export class InstituteHomeComponent implements OnInit {
   login_deatils: any
   login: any
   action_menu: boolean = true
-    loginststaus:boolean = false
+  loginststaus: boolean = false
   constructor(
     private dailog: MatDialog,
-    private servies:ManageService,
-    private router:Router
+    private servies: ManageService,
+    private router: Router
   ) {
     if (window.innerWidth > 768) {
       this.action_menu = true
@@ -40,9 +40,11 @@ export class InstituteHomeComponent implements OnInit {
   ngOnInit(): void {
     this.login_deatils = localStorage.getItem('Token')
     this.login = JSON.parse(this.login_deatils)
-    this.name = this.login.inst_name    
-    this.center = this.login.center_code   
+    this.name = this.login.inst_name
+    this.center = this.login.center_code
     this.get_inst_data(this.login.inst_id)
+
+    this.CheckLogin()
   }
   get_inst_data(inst: any) {
     const fromdata = new FormData()
@@ -51,11 +53,11 @@ export class InstituteHomeComponent implements OnInit {
       (res: any) => {
         this.name = res.data.inst_name
         this.center = res.data.center_code
-        if(!res.data.inst_logo){
-          this.img_url = "profile.jpg"          
+        if (!res.data.inst_logo) {
+          this.img_url = "profile.jpg"
         }
-        else{
-          this.img_url = res.data.inst_logo   
+        else {
+          this.img_url = res.data.inst_logo
         }
       }
     )
@@ -72,19 +74,36 @@ export class InstituteHomeComponent implements OnInit {
       disableClose: true
     });
   }
-  
-  logout(){
+
+  logout() {
     this.router.navigate(['institutelogin'])
     localStorage.clear()
-    
+
   }
 
-  ngAfterContentChecked(){
-    this.servies.loginValid.subscribe(res=>{
-          this.loginststaus = res
-          console.log(res)
-      })
 
+  ngAfterContentChecked() {
+    // this.servies.loginValid.subscribe(res=>{
+    //       this.loginststaus = res
+    //       console.log(res)
+    //   })
+
+
+  }
+
+  CheckLogin() {
+    const formdata = new FormData()
+    formdata.append('inst_id', this.login.inst_id)
+    this.servies.get_inst_by_inst_id(formdata).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.data.login_status !== this.login.login_status) {
+          console.log('now you are log out ');
+          this.logout()
+
+        }
+
+      })
 
   }
 }
