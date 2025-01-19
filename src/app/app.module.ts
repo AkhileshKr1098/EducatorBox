@@ -134,15 +134,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { LoginanotheComponent } from './admin/loginanothe/loginanothe.component';
 import { CertificateLoginComponent } from './institute/certificate-login/certificate-login.component';
-import { PaymentTransactionChildInstComponent } from './institute/Payment/payment-transaction-child-inst/payment-transaction-child-inst.component';
+
 import { PaymentTransactionPresentInstComponent } from './institute/Payment/payment-transaction-present-inst/payment-transaction-present-inst.component';
-import { PaymentAddRequestFormComponent } from './institute/Payment/payment-add-request-form/payment-add-request-form.component';
-import { PaymentAddRequestListComponent } from './institute/Payment/payment-add-request-list/payment-add-request-list.component';
-import { PaymentRequesListComponent } from './institute/Payment/payment-reques-list/payment-reques-list.component';
-import { PaymentAddDirectComponent } from './institute/Payment/payment-add-direct/payment-add-direct.component';
 import { WalletPayComponent } from './institute/Payment/wallet-pay/wallet-pay.component';
 import { WalletHistoryComponent } from './institute/Payment/wallet-history/wallet-history.component';
-import { AddMonyRequestComponent } from './institute/Payment/add-mony-request/add-mony-request.component';
 import { AddMoneyRequestComponent } from './institute/Payment/add-money-request/add-money-request.component';
 import { AddMoneyComponent } from './institute/Payment/add-money/add-money.component';
 import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
@@ -257,15 +252,9 @@ import { CenterListComponent } from './institute/Payment/center-list/center-list
     LiveClassComponent,
     LoginanotheComponent,
     CertificateLoginComponent,
-    PaymentTransactionChildInstComponent,
     PaymentTransactionPresentInstComponent,
-    PaymentAddRequestFormComponent,
-    PaymentAddRequestListComponent,
-    PaymentRequesListComponent,
-    PaymentAddDirectComponent,
     WalletPayComponent,
     WalletHistoryComponent,
-    AddMonyRequestComponent,
     AddMoneyRequestComponent,
     AddMoneyComponent,
     CenterListComponent,
