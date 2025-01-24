@@ -98,7 +98,7 @@
         <input type="number" readonly [ngModel]="admissition_status" formControlName="admissition_status" hidden>
 
         <div class="submit">
-            <button mat-raised-button color="primary" (click)="addstd()"
+            <button mat-raised-button color="primary" (click)="onCheckPayment()"
                 [disabled]="!this.addmission_form.valid">{{actionBtn}}</button>
         </div>
     </form>

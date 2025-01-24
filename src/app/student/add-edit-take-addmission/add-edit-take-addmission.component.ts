@@ -26,6 +26,13 @@ export class AddEditTakeAddmissionComponent implements OnInit {
   batch: any;
   reg: boolean = false
   total_fee: any
+
+  logindata = {
+    inst_id: '',
+    parent_center_id: '',
+    addmission_fee: 0
+  }
+
   onSubmit() {
     throw new Error('Method not implemented.');
   }
@@ -44,6 +51,10 @@ export class AddEditTakeAddmissionComponent implements OnInit {
     private matref: MatDialogRef<AddEditTakeAddmissionComponent>,
     @Inject(MAT_DIALOG_DATA) public edit_addmission: any
   ) {
+    const data = localStorage.getItem('Token')
+    if (data) {
+      this.logindata = JSON.parse(data)
+    }
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -111,13 +122,13 @@ export class AddEditTakeAddmissionComponent implements OnInit {
 
   get_course(event: any) {
     this.addmission_form.get('roll_no')?.reset()
-    this.addmission_form.get('batch_arrival')?.reset() 
+    this.addmission_form.get('batch_arrival')?.reset()
     this.addmission_form.get('batch_departure')?.reset()
-    this.addmission_form.get('batch_status')?.reset() 
+    this.addmission_form.get('batch_status')?.reset()
     this.addmission_form.get('batch_date')?.reset()
     this.addmission_form.get('admission_date')?.reset()
-    this.addmission_form.get('description')?.reset()       
-       
+    this.addmission_form.get('description')?.reset()
+
     const courseformdata = new FormData();
     courseformdata.append('course_id', event)
     this.service.get_batch_by_course_id(courseformdata).subscribe(
@@ -167,16 +178,16 @@ export class AddEditTakeAddmissionComponent implements OnInit {
       this.service.count_roll_no_by_batch(batchfromdata).subscribe(
         (result: any) => {
           console.log(result.data[0].total_roll)
-          const roll_no = Number(result.data[0].total_roll)+ Number(1)
+          const roll_no = Number(result.data[0].total_roll) + Number(1)
           this.addmission_form.controls['roll_no'].setValue(roll_no)
         }
       )
       this.addmission_form.controls['roll_no'].setValue(1)
     }
-    else{
+    else {
       // this.addmission_form.controls['roll_no'].setValue('')
     }
-   
+
 
     // for addmisstion check 
     const fromdata = new FormData()
@@ -221,10 +232,10 @@ export class AddEditTakeAddmissionComponent implements OnInit {
     if (this.inst_id) {
       formdata.append('admissition_status', '0')
     }
-    if(this.login.inst_id){
+    if (this.login.inst_id) {
       formdata.append('roll_no', this.addmission_form.get('roll_no')?.value)
     }
-    
+
 
     this.service.std_admission(formdata).subscribe(
       (result: any) => {
@@ -246,5 +257,59 @@ export class AddEditTakeAddmissionComponent implements OnInit {
     )
   }
 
- 
+
+
+  onCheckPayment() {
+    this.service.getCueentAmount(this.logindata.inst_id).subscribe(
+      (res: any) => {
+        console.log(res.data);
+        const countadm = Math.floor(res.data.amount / this.logindata.addmission_fee)
+        if (countadm > 0) {
+          this.moneyDebited()
+        } else {
+          alert('please add amount for wallet')
+        }
+      }
+    )
+  }
+
+  moneyDebited() {
+    const currentDate = new Date();
+    const formattedDate = this.formatDate(currentDate);
+    const adddata = new FormData()
+    adddata.append('transaction_date', formattedDate)
+    adddata.append('amount', `${this.logindata.addmission_fee}`)
+    adddata.append('sender_institute_id_fk', this.logindata.inst_id)
+    adddata.append('receiver_institute_id_fk', this.logindata.parent_center_id)
+    adddata.append('status', '1')
+    adddata.append('description', '')
+    adddata.append('attachment', '')
+    adddata.append('center_owner_name', '')
+    adddata.append('mobile_no', '')
+    adddata.append('title', 'Payment for Addmission')
+    adddata.append('std_id', this.edit_addmission.std_id)
+
+    this.service.AddMoeny(adddata).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.success == 1) {
+          this.addstd()
+          console.log('Money added successfully!');
+        }
+      }
+    )
+
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+
 }

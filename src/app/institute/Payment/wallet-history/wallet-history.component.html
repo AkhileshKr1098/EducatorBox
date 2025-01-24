@@ -1,1 +1,41 @@
-<p>wallet-history works!</p>
+<div class="wallet-container mat-elevation-z4">
+    <!-- Current Balance -->
+    <mat-card class="current-balance">
+        <h2>Current Balance</h2>
+        <h1>{{ totalAmount | currency:'INR' }}</h1>
+        <p style="color: red;">you can get addmission only {{getAddmissionStd}} Student</p>
+        <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add Money</button>
+    </mat-card>
+
+    <!-- Transaction History -->
+    <mat-card class="transaction-list">
+        <div *ngFor="let transaction of transactions" class="transaction-item">
+            <!-- Symbol for Credit/Debit -->
+            <span class="symbol" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+                {{ !transaction.std_id ? '+' : '-' }}
+            </span>
+
+            <!-- Transaction Details -->
+            <div class="details">
+                <p class="title">{{ transaction.title || 'No Title' }}</p>
+                <p class="subtitle">
+                    {{ transaction.transaction_date | date: 'MMM d, y, h:mm a' }}
+                </p>
+                <p class="subtitle" style="color: yellowgreen;" *ngIf="transaction.status == 0">
+                    Status - Pending
+                </p>
+                <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
+                    Status - Sucess
+                </p>
+            </div>
+
+            <!-- Amount -->
+
+            <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+                {{ transaction.amount | currency: 'INR' }}
+            </p>
+
+        </div>
+    </mat-card>
+
+</div>

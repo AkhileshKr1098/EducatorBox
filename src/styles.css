@@ -85,3 +85,31 @@
         right: 20px;
     }
 }
+
+
+
+/* for payment csss */
+
+.custom-dialog-container {
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: zoom-in 0.3s ease-out;
+  }
+  
+  @keyframes zoom-in {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .mat-dialog-container {
+    background-color: white;
+    color: #333;
+  }
+  

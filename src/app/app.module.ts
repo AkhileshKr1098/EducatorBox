@@ -52,7 +52,7 @@ import { QueryComponent } from './student/query/query.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { InsCourseComponent } from './admin/ins-course/ins-course.component';
@@ -130,8 +130,8 @@ import { InstCertRegComponent } from './institute/inst-cert-reg/inst-cert-reg.co
 import { InstCertLoginComponent } from './institute/inst-cert-login/inst-cert-login.component';
 import { LiveClassComponent } from './institute/live-class/live-class.component';
 import { MatSortModule } from '@angular/material/sort';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { LoginanotheComponent } from './admin/loginanothe/loginanothe.component';
 import { CertificateLoginComponent } from './institute/certificate-login/certificate-login.component';
 
@@ -291,6 +291,7 @@ import { CenterListComponent } from './institute/Payment/center-list/center-list
     MatSortModule,
     MatDatepickerModule,
     MatAutocompleteModule,
+    FormsModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
     })
