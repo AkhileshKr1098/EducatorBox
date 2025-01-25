@@ -3,6 +3,7 @@ import { InstChangePasswordComponent } from '../inst-change-password/inst-change
 import { MatDialog } from '@angular/material/dialog';
 import { ManageService } from 'src/app/manage.service';
 import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-institute-sidebar',
@@ -24,15 +25,22 @@ export class InstituteSidebarComponent implements OnInit {
   login_deatils: any
   login: any
   inst_name: any
+
+  logindata = {
+    inst_id: '',
+    parent_center_id: '',
+    addmission_fee: 0
+  }
   constructor(
     private dailog: MatDialog,
     private service: ManageService,
-    private router:Router
+    private router: Router
 
-  ) { 
+  ) {
     this.login_deatils = localStorage.getItem('Token')
     this.login = JSON.parse(this.login_deatils)
-    if(!this.login.inst_id){
+    this.logindata = JSON.parse(this.login_deatils)
+    if (!this.login.inst_id) {
       this.router.navigate(['/']);
       localStorage.clear()
     }

@@ -68,7 +68,6 @@ import { LiveClassComponent } from './institute/live-class/live-class.component'
 import { CertificateLoginComponent } from './institute/certificate-login/certificate-login.component';
 import { WalletHistoryComponent } from './institute/Payment/wallet-history/wallet-history.component';
 import { WalletPayComponent } from './institute/Payment/wallet-pay/wallet-pay.component';
-import { AddMoneyRequestComponent } from './institute/Payment/add-money-request/add-money-request.component';
 import { AddMoneyComponent } from './institute/Payment/add-money/add-money.component';
 import { PaymentTransactionPresentInstComponent } from './institute/Payment/payment-transaction-present-inst/payment-transaction-present-inst.component';
 import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
@@ -179,7 +178,6 @@ const routes: Routes = [
 
       { path: 'walletHistory', component: WalletHistoryComponent },
       { path: 'walletPay', component: WalletPayComponent },
-      { path: 'addmoneyreq', component: AddMoneyRequestComponent },
       { path: 'addmoney', component: AddMoneyComponent },
       { path: 'paymenttransactionlist', component: PaymentTransactionPresentInstComponent },
       { path: 'centerlist', component: CenterListComponent }

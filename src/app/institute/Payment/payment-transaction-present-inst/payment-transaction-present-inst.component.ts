@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageService } from 'src/app/manage.service';
+import { AddMoneyComponent } from '../add-money/add-money.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddMoneyDirectComponent } from '../add-money-direct/add-money-direct.component';
 
 @Component({
   selector: 'app-payment-transaction-present-inst',
@@ -6,10 +10,78 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-transaction-present-inst.component.css']
 })
 export class PaymentTransactionPresentInstComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  base_url: string = 'https://www.educatorbox.com/api/'
+  transactions: any
+  logindata = {
+    inst_id: '',
+    parent_center_id: '',
+    addmission_fee: 0
   }
+  getAddmissionStd = 0
+  totalAmount: number = 0; // Example balance
+
+  constructor(
+    private _crud: ManageService,
+    private dialog: MatDialog
+  ) {
+    const data = localStorage.getItem('Token')
+    if (data) {
+      this.logindata = JSON.parse(data)
+    }
+    this.getWalletByReceiver()
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+
+  getWalletByReceiver() {
+    this._crud.GetwalletByreceiverId(this.logindata.inst_id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.transactions = res.data
+      }
+    )
+  }
+
+  openAddMoneyDialog() {
+    const dialogRef = this.dialog.open(AddMoneyDirectComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog closed:', result);
+    });
+  }
+
+  onApproved(amt: number, id: number) {
+    const isConfirmed = confirm(`Are you sure you want to approve the amount: ₹ ${amt}?`);
+
+    if (isConfirmed) {
+      const data = {
+        "status": 1,
+        "id": id
+      }
+
+      this._crud.ApproveAmount(data).subscribe(
+        (res: any) => {
+          console.log(res);
+          if (res.success == 1) {
+            alert(`Amount ₹${amt} approved successfully!`);
+            this.getWalletByReceiver()
+          }
+
+        }
+      )
+
+    } else {
+      // Logic when the user cancels
+      alert('Approval process cancelled.');
+    }
+  }
+
+
 
 }

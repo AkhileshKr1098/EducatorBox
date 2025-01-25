@@ -150,15 +150,22 @@
                 </button>
             </div>
 
-            <button mat-button class="menu-button" [routerLink]="['walletHistory']" routerLinkActive="active">
+            <button *ngIf="logindata.parent_center_id" mat-button class="menu-button" [routerLink]="['walletHistory']"
+                routerLinkActive="active">
                 <mat-icon>account_balance_wallet</mat-icon>
                 <span>wallet</span>
             </button>
 
-            <!-- <button mat-button class="menu-button" [routerLink]="['instquery']" routerLinkActive="active">
+            <button *ngIf="!logindata.parent_center_id" mat-button class="menu-button"
+                [routerLink]="['paymenttransactionlist']" routerLinkActive="active">
                 <mat-icon>account_balance_wallet</mat-icon>
-                <span>wallet</span>
-            </button> -->
+                <span>Payment</span>
+            </button>
+            <button *ngIf="!logindata.parent_center_id" mat-button class="menu-button" [routerLink]="['centerlist']"
+                routerLinkActive="active">
+                <mat-icon>account_balance_wallet</mat-icon>
+                <span>Center List</span>
+            </button>
         </div>
     </div>
     <div>

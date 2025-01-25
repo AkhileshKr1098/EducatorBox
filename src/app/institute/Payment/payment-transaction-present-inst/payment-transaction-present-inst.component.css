@@ -1,0 +1,108 @@
+.wallet-container {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+mat-card {
+    padding: 20px;
+}
+
+.current-balance h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #555;
+}
+
+.current-balance h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #4caf50;
+}
+
+.transaction-list {
+    padding: 10px;
+}
+
+.transaction-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.symbol {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 30px;
+    text-align: center;
+}
+
+.symbol.positive {
+    color: #4caf50;
+}
+
+.symbol.negative {
+    color: #f44336;
+}
+
+.details {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.amount {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.amount.positive {
+    color: #4caf50;
+}
+
+.amount.negative {
+    color: #f44336;
+}
+
+
+/* for add button start  */
+
+.addMoney {
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.addMoney:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.addMoney mat-icon {
+    font-size: 20px;
+}
+
+/* for add button end  */

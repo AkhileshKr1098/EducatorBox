@@ -1,1 +1,71 @@
-<p>center-list works!</p>
+<div class="head">
+    <span class="batch_text">Center List</span>
+</div>
+
+
+<div class="mat-elevation-z8">
+    <div class="mat-elevation-z8">
+
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-table">
+            <!-- inst_id Column -->
+            <ng-container matColumnDef="inst_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Inst ID</th>
+                <td mat-cell *matCellDef="let element">{{ element.inst_id }}</td>
+            </ng-container>
+
+            <!-- inst_name Column -->
+            <ng-container matColumnDef="center_code">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>center code</th>
+                <td mat-cell *matCellDef="let element">{{ element.center_code }}</td>
+            </ng-container>
+            <ng-container matColumnDef="inst_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Inst Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.inst_name }}</td>
+            </ng-container>
+
+            <!-- inst_owner_name Column -->
+            <ng-container matColumnDef="inst_owner_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.inst_owner_name }}</td>
+            </ng-container>
+
+            <!-- inst_email Column -->
+            <ng-container matColumnDef="inst_email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.inst_email }}</td>
+            </ng-container>
+
+            <!-- inst_whatsapp_no Column -->
+            <ng-container matColumnDef="inst_whatsapp_no">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>WhatsApp No.</th>
+                <td mat-cell *matCellDef="let element">{{ element.inst_whatsapp_no }}</td>
+            </ng-container>
+
+            <!-- addmission_fee Column -->
+            <ng-container matColumnDef="addmission_fee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Admission Fee</th>
+                <td mat-cell *matCellDef="let element">{{ element.addmission_fee }}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button color="primary" (click)="onEdit(element)">
+                        Edit
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+
+
+</div>

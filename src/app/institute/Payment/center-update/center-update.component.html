@@ -1,0 +1,25 @@
+<mat-toolbar class="add_form_title">
+    <span class="example-spacer">Update Center</span>
+    <mat-icon mat-dialog-close class="close-mat-icon">cancel</mat-icon>
+</mat-toolbar>
+
+<div id="wrapper">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Center Code </mat-label>
+        <input matInput [(ngModel)]="edit_data.inst_name" readonly>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Center name </mat-label>
+        <input matInput [(ngModel)]="edit_data.center_code" readonly>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input matInput [(ngModel)]="edit_data.addmission_fee" placeholder="Enter amount">
+    </mat-form-field>
+
+    <div class="center">
+        <button mat-raised-button color="primary" (click)="onUpdate()">Update</button>
+
+    </div>
+</div>

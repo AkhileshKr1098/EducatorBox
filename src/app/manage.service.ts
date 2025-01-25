@@ -621,15 +621,29 @@ export class ManageService {
   }
 
   // for paymen api 
-  GetwalletBySenderId(data: any) {
-    return this.http.get<any>(this.baseUrl + 'wallet.php', data)
+  GetwalletBySenderId(id: any) {
+    return this.http.get<any>(this.baseUrl + `wallet.php?sender_institute_id_fk=${id}`)
+  }
+  GetwalletByreceiverId(id: any) {
+    return this.http.get<any>(this.baseUrl + `wallet.php?receiver_institute_id_fk=${id}`)
   }
 
   AddMoeny(data: any) {
     return this.http.post<any>(this.baseUrl + 'wallet.php', data)
   }
 
+  ApproveAmount(data: any) {
+    return this.http.put<any>(this.baseUrl + 'wallet.php', data)
+  }
+
   getCueentAmount(id: any) {
     return this.http.get<any>(`${this.baseUrl}getCurrentAmount.php?inst_id_child=${id}`)
+  }
+  getCenterList(id: number) {
+    return this.http.get<any>(`${this.baseUrl}get_centerlist.php?inst_id=${id}`)
+  }
+
+  addmissionFeeUpdate(data: any) {
+    return this.http.post<any>(`${this.baseUrl}centerupdate.php`, data)
   }
 } 

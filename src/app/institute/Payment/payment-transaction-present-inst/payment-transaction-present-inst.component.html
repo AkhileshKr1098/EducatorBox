@@ -1,1 +1,46 @@
-<p>payment-transaction-present-inst works!</p>
+<div class="wallet-container mat-elevation-z4">
+    <!-- Current Balance -->
+    <mat-card class="current-balance">
+        <h2>Payment list</h2>
+        <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add Money</button>
+    </mat-card>
+
+    <!-- Transaction History -->
+    <mat-card class="transaction-list">
+        <div *ngFor="let transaction of transactions" class="transaction-item">
+            <!-- Symbol for Credit/Debit -->
+            <span class="symbol" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+                {{ !transaction.std_id ? '+' : '-' }}
+            </span>
+
+            <!-- Transaction Details -->
+            <div class="details">
+                <p class="title">Center Code : {{ transaction.center_code || 'No Name' }}</p>
+                <p class="title">{{ transaction.center_owner_name || 'No Name' }}</p>
+                <p class="title">{{ transaction.mobile_no || 'No Name' }}</p>
+                <p class="subtitle">
+                    {{ transaction.transaction_date | date: 'MMM d, y, h:mm a' }}
+                </p>
+                <p class="subtitle" style="color: yellowgreen;" *ngIf="transaction.status == 0">
+                    Status - Pending
+                </p>
+                <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
+                    Status - Sucess
+                </p>
+                <a *ngIf="transaction.attachment" target="_blank" href="{{base_url+transaction.attachment}}">Attachment</a>
+            </div>
+
+            <!-- Amount -->
+
+            <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+                {{ transaction.amount | currency: 'INR' }}
+            </p>
+            &nbsp; &nbsp; &nbsp;
+            <button *ngIf="transaction.status == 0" class="addMoney"
+                (click)="onApproved(transaction.amount, transaction.id)"><mat-icon>check_circle</mat-icon>
+                Approve</button>
+
+        </div>
+    </mat-card>
+
+</div>

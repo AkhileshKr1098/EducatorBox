@@ -138,9 +138,10 @@ import { CertificateLoginComponent } from './institute/certificate-login/certifi
 import { PaymentTransactionPresentInstComponent } from './institute/Payment/payment-transaction-present-inst/payment-transaction-present-inst.component';
 import { WalletPayComponent } from './institute/Payment/wallet-pay/wallet-pay.component';
 import { WalletHistoryComponent } from './institute/Payment/wallet-history/wallet-history.component';
-import { AddMoneyRequestComponent } from './institute/Payment/add-money-request/add-money-request.component';
 import { AddMoneyComponent } from './institute/Payment/add-money/add-money.component';
 import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
+import { CenterUpdateComponent } from './institute/Payment/center-update/center-update.component';
+import { AddMoneyDirectComponent } from './institute/Payment/add-money-direct/add-money-direct.component';
 
 @NgModule({
   declarations: [
@@ -255,9 +256,10 @@ import { CenterListComponent } from './institute/Payment/center-list/center-list
     PaymentTransactionPresentInstComponent,
     WalletPayComponent,
     WalletHistoryComponent,
-    AddMoneyRequestComponent,
     AddMoneyComponent,
     CenterListComponent,
+    CenterUpdateComponent,
+    AddMoneyDirectComponent,
   ],
   imports: [
     BrowserModule,

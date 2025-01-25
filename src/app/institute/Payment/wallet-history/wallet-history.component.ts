@@ -44,10 +44,7 @@ export class WalletHistoryComponent implements OnInit {
   }
 
   getWalletBySender() {
-    const data = {
-      "sender_institute_id_fk": this.logindata.inst_id
-    }
-    this._crud.GetwalletBySenderId(data).subscribe(
+    this._crud.GetwalletBySenderId(this.logindata.inst_id).subscribe(
       (res: any) => {
         console.log(res);
         this.transactions = res.data

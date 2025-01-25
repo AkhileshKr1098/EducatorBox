@@ -17,7 +17,8 @@ export class AddMoneyComponent implements OnInit {
   logindata = {
     inst_id: '',
     parent_center_id: '',
-    addmission_fee: ''
+    addmission_fee: '',
+    center_code: ''
   }
   ngOnInit(): void {
   }
@@ -42,12 +43,15 @@ export class AddMoneyComponent implements OnInit {
   }
 
   onAdd() {
+    console.log(this.logindata.center_code);
+    
     const currentDate = new Date();
     const formattedDate = this.formatDate(currentDate);
     const adddata = new FormData()
     adddata.append('transaction_date', formattedDate)
     adddata.append('amount', `${this.amount}`)
     adddata.append('sender_institute_id_fk', this.logindata.inst_id)
+    adddata.append('center_code', this.logindata.center_code || 'DEM005');
     adddata.append('receiver_institute_id_fk', this.logindata.parent_center_id)
     adddata.append('status', '0')
     adddata.append('description', '')
