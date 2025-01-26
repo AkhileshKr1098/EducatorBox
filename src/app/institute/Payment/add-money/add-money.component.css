@@ -10,8 +10,8 @@
 }
 
 .upload-section {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   gap: 8px;
   margin-top: 1rem;
 }
@@ -26,10 +26,7 @@
   cursor: pointer;
 }
 
-.upload-input {
-  display: none;
-  /* Hidden input */
-}
+
 
 .mat-dialog-container {
   border-radius: 10px;

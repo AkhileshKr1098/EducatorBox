@@ -71,6 +71,8 @@ import { WalletPayComponent } from './institute/Payment/wallet-pay/wallet-pay.co
 import { AddMoneyComponent } from './institute/Payment/add-money/add-money.component';
 import { PaymentTransactionPresentInstComponent } from './institute/Payment/payment-transaction-present-inst/payment-transaction-present-inst.component';
 import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
+import { WalletReportChildComponent } from './institute/Payment/wallet-report-child/wallet-report-child.component';
+import { WalletReportPresentComponent } from './institute/Payment/wallet-report-present/wallet-report-present.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -180,7 +182,9 @@ const routes: Routes = [
       { path: 'walletPay', component: WalletPayComponent },
       { path: 'addmoney', component: AddMoneyComponent },
       { path: 'paymenttransactionlist', component: PaymentTransactionPresentInstComponent },
-      { path: 'centerlist', component: CenterListComponent }
+      { path: 'centerlist', component: CenterListComponent },
+      { path: 'walletreport', component: WalletReportChildComponent },
+      { path: 'walletreportpresent', component: WalletReportPresentComponent }
 
     ]
   },

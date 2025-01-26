@@ -20,9 +20,10 @@
   <img *ngIf="qrcode" src="../../../../assets/QR-Codes.png" height="150px" width="100px" alt="">
   <button class="btncusome" (click)="onQrcodeShow()">{{qrcode == true?'Hide QR Code':'Show QR Code'}}</button>
   <div class="upload-section">
-    <label for="upload-file" class="upload-label">
+    <!-- <label for="upload-file" class="upload-label">
       <mat-icon>upload_file</mat-icon> Upload Payment Screenshot
-    </label>
+    </label> -->
+    <label for="upload-file" class="upload-label">Upload Payment Screenshot</label>
     <input id="upload-file" type="file" class="upload-input" (change)="onFileUpload($event)">
   </div>
 </div>

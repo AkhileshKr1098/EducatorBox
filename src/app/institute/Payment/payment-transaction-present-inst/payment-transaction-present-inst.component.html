@@ -15,19 +15,29 @@
 
             <!-- Transaction Details -->
             <div class="details">
-                <p class="title">Center Code : {{ transaction.center_code || 'No Name' }}</p>
-                <p class="title">{{ transaction.center_owner_name || 'No Name' }}</p>
-                <p class="title">{{ transaction.mobile_no || 'No Name' }}</p>
+                <p class="title">{{ transaction.center_owner_name}} - {{ transaction.mobile_no }}</p>
+                <p class="subtitle">{{transaction.inst_name}} - {{ transaction.centerCode}} </p>
                 <p class="subtitle">
-                    {{ transaction.transaction_date | date: 'MMM d, y, h:mm a' }}
+                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00'
+                    ? (transaction.transaction_date | date: 'MMM d, y, h:mm a')
+                    : 'Invalid Date' }}
+                </p>
+                <p *ngIf="transaction.description" class="subtitle">
+                    Description - {{transaction.description}}
                 </p>
                 <p class="subtitle" style="color: yellowgreen;" *ngIf="transaction.status == 0">
                     Status - Pending
                 </p>
+
                 <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
                     Status - Sucess
                 </p>
-                <a *ngIf="transaction.attachment" target="_blank" href="{{base_url+transaction.attachment}}">Attachment</a>
+
+                <p class="subtitle" style="color: red;" *ngIf="transaction.status == 2">
+                    Status - Rejected
+                </p>
+                <a *ngIf="transaction.attachment" target="_blank"
+                    href="{{base_url+transaction.attachment}}">Attachment</a>
             </div>
 
             <!-- Amount -->
@@ -36,11 +46,25 @@
                 {{ transaction.amount | currency: 'INR' }}
             </p>
             &nbsp; &nbsp; &nbsp;
-            <button *ngIf="transaction.status == 0" class="addMoney"
-                (click)="onApproved(transaction.amount, transaction.id)"><mat-icon>check_circle</mat-icon>
-                Approve</button>
+
+            <div class="actionButton">
+                <button *ngIf="transaction.status == 0" class="rejectbtn"
+                    (click)="onReject(transaction.amount, transaction.id)"><mat-icon>cancel</mat-icon>
+                    Reject</button>
+
+                <button *ngIf="transaction.status == 0" class="addMoney"
+                    (click)="onApproved(transaction.amount, transaction.id)"><mat-icon>check_circle</mat-icon>
+                    Approve</button>
+            </div>
+
 
         </div>
+        <button *ngIf="transactions.length >= 5" mat-raised-button color="primary" class="see-more-button"
+            (click)="onSeeMore()">
+            <mat-icon>expand_more</mat-icon>
+            See More
+        </button>
     </mat-card>
+
 
 </div>

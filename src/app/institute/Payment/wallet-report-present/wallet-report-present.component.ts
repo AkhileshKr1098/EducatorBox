@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ManageService } from 'src/app/manage.service';
-import { AddMoneyComponent } from '../add-money/add-money.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddMoneyDirectComponent } from '../add-money-direct/add-money-direct.component';
 import { Router } from '@angular/router';
+import { ManageService } from 'src/app/manage.service';
 
 @Component({
-  selector: 'app-payment-transaction-present-inst',
-  templateUrl: './payment-transaction-present-inst.component.html',
-  styleUrls: ['./payment-transaction-present-inst.component.css']
+  selector: 'app-wallet-report-present',
+  templateUrl: './wallet-report-present.component.html',
+  styleUrls: ['./wallet-report-present.component.css']
 })
-export class PaymentTransactionPresentInstComponent implements OnInit {
+export class WalletReportPresentComponent implements OnInit {
+
+ 
   base_url: string = 'https://www.educatorbox.com/api/'
   transactions: any
   logindata = {
@@ -41,23 +41,12 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
     this._crud.GetwalletByreceiverId(this.logindata.inst_id).subscribe(
       (res: any) => {
         console.log(res);
-        this.transactions = res.data.slice(0, 5)
+        this.transactions = res.data
       }
     )
   }
 
-  openAddMoneyDialog() {
-    const dialogRef = this.dialog.open(AddMoneyDirectComponent, {
-      width: '600px',
-      height: 'auto',
-      panelClass: 'custom-dialog-container',
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed:', result);
-      this.getWalletByReceiver()
-    });
-  }
 
   onApproved(amt: number, id: number) {
     const isConfirmed = confirm(`Are you sure you want to approve the amount: ₹ ${amt}?`);
@@ -115,9 +104,8 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
   onSeeMore() {
     // Implement logic to load or display more transactions
     console.log('Load more transactions...');
-    this._router.navigate(['/institutehome/walletreportpresent'])
+    this._router.navigate(['/institutehome/walletreport'])
   }
-
 
 
 }

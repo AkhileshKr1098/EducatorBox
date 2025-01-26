@@ -1,11 +1,5 @@
 <div class="wallet-container mat-elevation-z4">
-    <!-- Current Balance -->
-    <mat-card class="current-balance">
-        <h2>Current Balance</h2>
-        <h1>{{ totalAmount | currency:'INR' }}</h1>
-        <p style="color: red;">you can get addmission only {{getAddmissionStd}} Student</p>
-        <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add Money</button>
-    </mat-card>
+
 
     <!-- Transaction History -->
     <mat-card class="transaction-list">
@@ -19,11 +13,11 @@
             <div class="details">
                 <p class="title">{{ transaction.title || 'No Title' }}</p>
                 <p class="subtitle">
-                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00' 
-                        ? (transaction.transaction_date | date: 'MMM d, y, h:mm a') 
-                        : 'Invalid Date' }}
-                  </p>
-                  
+                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00'
+                    ? (transaction.transaction_date | date: 'MMM d, y, h:mm a')
+                    : 'Invalid Date' }}
+                </p>
+
                 <p *ngIf="transaction.description" class="subtitle">
                     Description - {{transaction.description}}
                 </p>
@@ -45,13 +39,7 @@
                 {{ transaction.amount | currency: 'INR' }}
             </p>
 
-
         </div>
-        <button *ngIf="transactions.length >= 5" mat-raised-button color="primary" class="see-more-button"
-            (click)="onSeeMore()">
-            <mat-icon>expand_more</mat-icon>
-            See More
-        </button>
     </mat-card>
 
 </div>

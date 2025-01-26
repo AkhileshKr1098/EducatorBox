@@ -142,6 +142,8 @@ import { AddMoneyComponent } from './institute/Payment/add-money/add-money.compo
 import { CenterListComponent } from './institute/Payment/center-list/center-list.component';
 import { CenterUpdateComponent } from './institute/Payment/center-update/center-update.component';
 import { AddMoneyDirectComponent } from './institute/Payment/add-money-direct/add-money-direct.component';
+import { WalletReportChildComponent } from './institute/Payment/wallet-report-child/wallet-report-child.component';
+import { WalletReportPresentComponent } from './institute/Payment/wallet-report-present/wallet-report-present.component';
 
 @NgModule({
   declarations: [
@@ -260,6 +262,8 @@ import { AddMoneyDirectComponent } from './institute/Payment/add-money-direct/ad
     CenterListComponent,
     CenterUpdateComponent,
     AddMoneyDirectComponent,
+    WalletReportChildComponent,
+    WalletReportPresentComponent,
   ],
   imports: [
     BrowserModule,

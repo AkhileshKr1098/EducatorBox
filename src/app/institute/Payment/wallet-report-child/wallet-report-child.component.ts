@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ManageService } from 'src/app/manage.service';
-import { AddMoneyComponent } from '../add-money/add-money.component';
 import { Router } from '@angular/router';
+import { ManageService } from 'src/app/manage.service';
 
 @Component({
-  selector: 'app-wallet-history',
-  templateUrl: './wallet-history.component.html',
-  styleUrls: ['./wallet-history.component.css']
+  selector: 'app-wallet-report-child',
+  templateUrl: './wallet-report-child.component.html',
+  styleUrls: ['./wallet-report-child.component.css']
 })
-export class WalletHistoryComponent implements OnInit {
-  transactions: any
+export class WalletReportChildComponent implements OnInit {
+transactions: any
   logindata = {
     inst_id: '',
     parent_center_id: '',
@@ -21,8 +20,7 @@ export class WalletHistoryComponent implements OnInit {
 
   constructor(
     private _crud: ManageService,
-    private dialog: MatDialog,
-    private _router: Router
+    private dialog: MatDialog
   ) {
     const data = localStorage.getItem('Token')
     if (data) {
@@ -49,29 +47,10 @@ export class WalletHistoryComponent implements OnInit {
     this._crud.GetwalletBySenderId(this.logindata.inst_id).subscribe(
       (res: any) => {
         console.log(res);
-        this.transactions = res.data.slice(0, 5)
+        this.transactions = res.data
       }
     )
   }
 
-  openAddMoneyDialog() {
-    const dialogRef = this.dialog.open(AddMoneyComponent, {
-      width: '400px',
-      height: 'auto',
-      panelClass: 'custom-dialog-container',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed:', result);
-      this.getWalletBySender()
-    });
-  }
-
-
-  onSeeMore() {
-    // Implement logic to load or display more transactions
-    console.log('Load more transactions...');
-    this._router.navigate(['/institutehome/walletreport'])
-  }
 
 }

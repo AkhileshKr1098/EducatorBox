@@ -14,7 +14,7 @@ import { CenterUpdateComponent } from '../center-update/center-update.component'
   styleUrls: ['./center-list.component.css']
 })
 export class CenterListComponent implements OnInit {
-  displayedColumns: string[] = ['inst_id', 'center_code', 'inst_name', 'inst_owner_name', 'inst_email', 'inst_whatsapp_no', 'addmission_fee', 'action'];
+  displayedColumns: string[] = ['inst_id', 'center_code', 'inst_name', 'inst_owner_name', 'inst_email', 'inst_whatsapp_no', 'addmission_fee', 'current_amount', 'action'];
   dataSource = new MatTableDataSource<any>([]); // Initialize with an empty array
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -24,6 +24,7 @@ export class CenterListComponent implements OnInit {
     parent_center_id: '',
     admission_fee: 0
   };
+  Math: any;
 
   constructor(
     private dialog: MatDialog,
@@ -49,6 +50,8 @@ export class CenterListComponent implements OnInit {
       (res: any) => {
         if (res && res.success) {
           // Set the table data source with the received data
+          console.log(res.data);
+
           this.dataSource.data = res.data;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -86,6 +89,12 @@ export class CenterListComponent implements OnInit {
       }
       else { }
     });
+  }
+
+  getCurrentAmount(totalAmount: number, addmission_fee: number) {
+
+    return Math.floor(totalAmount / addmission_fee)
+
   }
 
 }

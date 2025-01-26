@@ -7,7 +7,7 @@ import { ManageService } from 'src/app/manage.service';
   templateUrl: './add-money.component.html',
   styleUrls: ['./add-money.component.css']
 })
-export class AddMoneyComponent implements OnInit {
+export class AddMoneyComponent {
   qrcode: boolean = false
   ownername: string = ''
   mobileno: string = ''
@@ -20,8 +20,7 @@ export class AddMoneyComponent implements OnInit {
     addmission_fee: '',
     center_code: ''
   }
-  ngOnInit(): void {
-  }
+
   constructor(
     private _crud: ManageService,
     private dialogRef: MatDialogRef<AddMoneyComponent>) {
@@ -30,9 +29,8 @@ export class AddMoneyComponent implements OnInit {
       this.logindata = JSON.parse(data)
     }
   }
+
   uploadedFileName: string | null = null;
-
-
   onFileUpload(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -44,33 +42,38 @@ export class AddMoneyComponent implements OnInit {
 
   onAdd() {
     console.log(this.logindata.center_code);
-    
-    const currentDate = new Date();
-    const formattedDate = this.formatDate(currentDate);
-    const adddata = new FormData()
-    adddata.append('transaction_date', formattedDate)
-    adddata.append('amount', `${this.amount}`)
-    adddata.append('sender_institute_id_fk', this.logindata.inst_id)
-    adddata.append('center_code', this.logindata.center_code || 'DEM005');
-    adddata.append('receiver_institute_id_fk', this.logindata.parent_center_id)
-    adddata.append('status', '0')
-    adddata.append('description', '')
-    adddata.append('attachment', this.fileuploded || '')
-    adddata.append('center_owner_name', this.ownername)
-    adddata.append('mobile_no', this.mobileno)
-    adddata.append('title', 'Payment Create By Sankalp EDU')
-    adddata.append('std_id', '')
+    if (this.ownername == '' || this.mobileno == '' || this.amount == '' || this.fileuploded == undefined) {
+      alert('Please fill all the filds')
+    } else {
+      const currentDate = new Date();
+      const formattedDate = this.formatDate(currentDate);
+      const adddata = new FormData()
+      adddata.append('transaction_date', formattedDate)
+      adddata.append('amount', `${this.amount}`)
+      adddata.append('sender_institute_id_fk', this.logindata.inst_id)
+      adddata.append('center_code', this.logindata.center_code || 'DEM005');
+      adddata.append('receiver_institute_id_fk', this.logindata.parent_center_id)
+      adddata.append('status', '0')
+      adddata.append('description', '')
+      adddata.append('attachment', this.fileuploded || '')
+      adddata.append('center_owner_name', this.ownername)
+      adddata.append('mobile_no', this.mobileno)
+      adddata.append('title', 'Payment Create By Sankalp EDU')
+      adddata.append('std_id', '')
 
-    this._crud.AddMoeny(adddata).subscribe(
-      (res: any) => {
-        console.log(res);
+      this._crud.AddMoeny(adddata).subscribe(
+        (res: any) => {
+          console.log(res);
 
-        if (res.success == 1) {
-          console.log('Money added successfully!');
-          this.dialogRef.close();
+          if (res.success == 1) {
+            console.log('Money added successfully!');
+            this.dialogRef.close(1);
+          }
         }
-      }
-    )
+      )
+
+    }
+
 
   }
 

@@ -1,4 +1,4 @@
-/* for toggale button on time coolor change  */
+/* Toggle Button Color on Checked */
 :host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color: #075e2e;
 }
@@ -7,10 +7,10 @@
     background-color: #012307;
 }
 
+/* General Layout Styles */
 .count_area_fee {
-    height: auto;
     width: 100%;
-    padding: 5px 5px 5px 0px;
+    padding: 5px 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -18,30 +18,20 @@
 
 mat-form-field {
     height: 50px;
-    margin: 0px 5px;
+    margin: 0 5px;
 }
 
 .example-spacer {
     flex: 1 1 auto;
 }
 
-.search_box {
-    border: none;
-    width: 200px;
-    border-bottom: 1px solid #1d1f23;
-    outline: none;
-    padding: 5px 5px;
-    background-color: whitesmoke;
-    box-sizing: border-box;
-    position: relative;
-    top: 12px;
-}
+.search_box,
 .search_box_std {
     border: none;
     width: 200px;
     border-bottom: 1px solid #1d1f23;
     outline: none;
-    padding: 5px 5px;
+    padding: 5px;
     background-color: whitesmoke;
     box-sizing: border-box;
 }
@@ -50,21 +40,21 @@ mat-form-field {
     color: #1d1f23;
 }
 
-/* for table starting always */
+/* Table Styles */
 table {
     width: 100%;
 }
 
 th.mat-header-cell {
-    color: rgb(255, 255, 255);
+    color: #fff;
     background-color: #1d1f23;
     font-size: 13px;
     white-space: nowrap;
-    padding: 0px 10px !important;
+    padding: 0 10px !important;
 }
 
 td.mat-cell {
-    padding: 0px 10px !important;
+    padding: 0 10px !important;
     white-space: nowrap;
     font-size: 13px;
 }
@@ -75,75 +65,98 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #494949;
-    color: rgb(253, 253, 253);
+    color: #fdfdfd;
 }
 
-.mat-row:hover>.mat-cell {
-    color: white;
+.mat-row:hover > .mat-cell {
+    color: #fff;
 }
 
+/* Scrollbar Styles */
 .mat-elevation-z8 {
     overflow: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #888 #f1f1f1; /* Firefox */
 }
 
+/* Webkit Scrollbar */
+.mat-elevation-z8::-webkit-scrollbar {
+    width: 15px;
+}
+
+.mat-elevation-z8::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.mat-elevation-z8::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.mat-elevation-z8::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Table Header */
 #thead {
     height: 45px;
 }
 
+/* Paginator Styles */
 .mat-paginator-container {
     background: whitesmoke;
 }
 
-#status_bar{
+/* Status Bar Styles */
+#status_bar {
     width: 100%;
-    height: auto;
-    background-color:#1d1f23;
-    position: relative;
-    bottom: 3px;
+    background-color: #1d1f23;
     display: flex;
     justify-content: space-evenly;
     color: whitesmoke;
     font-size: 12px;
     line-height: 40px;
     flex-wrap: wrap;
-
 }
 
-@media (min-width:1366px) {}
+/* Responsive Design */
+@media (min-width: 1366px) {}
 
-@media(min-width:991px) and (max-width:1366px) {
+/* Medium Screens (991px - 1366px) */
+@media (min-width: 991px) and (max-width: 1366px) {
     .count_area_fee {
         align-items: center;
         gap: 5px;
     }
 
     .search_box {
-        top: 0px;
+        top: 0;
         width: 100%;
     }
 
-    .count_area_fee>div {
+    .count_area_fee > div {
         display: flex;
         width: calc(50% - 47px);
         gap: 5px;
         padding-left: 2px;
     }
 
-    .count_area_fee>div>mat-form-field {
+    .count_area_fee > div > mat-form-field {
         width: calc(50% - 2px);
-        margin: 0px;
-        padding: 0px;
+        margin: 0;
+        padding: 0;
     }
 }
 
-@media(min-width:768px) and (max-width:991px) {
+/* Small Screens (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
     .count_area_fee {
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         gap: 5px;
     }
 
-    .count_area_fee>div {
+    .count_area_fee > div {
         width: 100%;
         display: flex;
         flex: 1 1;
@@ -154,19 +167,20 @@ tr:hover {
     }
 
     .search_box {
-        top: 0px;
+        top: 0;
         width: 100%;
     }
 }
 
-@media(max-width:768px) {
+/* Extra Small Screens (max-width: 768px) */
+@media (max-width: 768px) {
     .count_area_fee {
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         gap: 5px;
     }
 
-    .count_area_fee>div {
+    .count_area_fee > div {
         width: 100%;
         display: flex;
         flex: 1 1;
@@ -178,7 +192,7 @@ tr:hover {
     }
 
     .search_box {
-        top: 0px;
+        top: 0;
         width: 100%;
     }
 }

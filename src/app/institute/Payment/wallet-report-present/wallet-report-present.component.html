@@ -1,11 +1,4 @@
 <div class="wallet-container mat-elevation-z4">
-    <!-- Current Balance -->
-    <mat-card class="current-balance">
-        <h2>Current Balance</h2>
-        <h1>{{ totalAmount | currency:'INR' }}</h1>
-        <p style="color: red;">you can get addmission only {{getAddmissionStd}} Student</p>
-        <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add Money</button>
-    </mat-card>
 
     <!-- Transaction History -->
     <mat-card class="transaction-list">
@@ -17,26 +10,29 @@
 
             <!-- Transaction Details -->
             <div class="details">
-                <p class="title">{{ transaction.title || 'No Title' }}</p>
+                <p class="title">{{ transaction.center_owner_name}} - {{ transaction.mobile_no }}</p>
+                <p class="subtitle">{{transaction.inst_name}} - {{ transaction.centerCode}} </p>
                 <p class="subtitle">
-                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00' 
-                        ? (transaction.transaction_date | date: 'MMM d, y, h:mm a') 
-                        : 'Invalid Date' }}
-                  </p>
-                  
+                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00'
+                    ? (transaction.transaction_date | date: 'MMM d, y, h:mm a')
+                    : 'Invalid Date' }}
+                </p>
                 <p *ngIf="transaction.description" class="subtitle">
                     Description - {{transaction.description}}
                 </p>
-
                 <p class="subtitle" style="color: yellowgreen;" *ngIf="transaction.status == 0">
                     Status - Pending
                 </p>
+
                 <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
                     Status - Sucess
                 </p>
+
                 <p class="subtitle" style="color: red;" *ngIf="transaction.status == 2">
                     Status - Rejected
                 </p>
+                <a *ngIf="transaction.attachment" target="_blank"
+                    href="{{base_url+transaction.attachment}}">Attachment</a>
             </div>
 
             <!-- Amount -->
@@ -44,6 +40,17 @@
             <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
                 {{ transaction.amount | currency: 'INR' }}
             </p>
+            &nbsp; &nbsp; &nbsp;
+
+            <div class="actionButton">
+                <button *ngIf="transaction.status == 0" class="rejectbtn"
+                    (click)="onReject(transaction.amount, transaction.id)"><mat-icon>cancel</mat-icon>
+                    Reject</button>
+
+                <button *ngIf="transaction.status == 0" class="addMoney"
+                    (click)="onApproved(transaction.amount, transaction.id)"><mat-icon>check_circle</mat-icon>
+                    Approve</button>
+            </div>
 
 
         </div>
@@ -53,5 +60,6 @@
             See More
         </button>
     </mat-card>
+
 
 </div>
