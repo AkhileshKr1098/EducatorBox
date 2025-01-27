@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class WalletHistoryComponent implements OnInit {
   transactions: any
   logindata = {
-    inst_id: '',
+    inst_id: 0,
     parent_center_id: '',
     addmission_fee: 0
   }

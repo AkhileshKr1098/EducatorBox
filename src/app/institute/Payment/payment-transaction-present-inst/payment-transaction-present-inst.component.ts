@@ -48,7 +48,7 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
 
   openAddMoneyDialog() {
     const dialogRef = this.dialog.open(AddMoneyDirectComponent, {
-      width: '600px',
+      width: '400px',
       height: 'auto',
       panelClass: 'custom-dialog-container',
     });

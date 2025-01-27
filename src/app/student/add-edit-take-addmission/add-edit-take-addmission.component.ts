@@ -274,6 +274,9 @@ export class AddEditTakeAddmissionComponent implements OnInit {
   }
 
   moneyDebited() {
+    console.log(this.edit_addmission.std_name)
+    console.log(this.edit_addmission.std_regist_no)
+    console.log(this.edit_addmission.std_id)
     const currentDate = new Date();
     const formattedDate = this.formatDate(currentDate);
     const adddata = new FormData()
@@ -286,7 +289,7 @@ export class AddEditTakeAddmissionComponent implements OnInit {
     adddata.append('attachment', '')
     adddata.append('center_owner_name', '')
     adddata.append('mobile_no', '')
-    adddata.append('title', 'Payment for Addmission')
+    adddata.append('title', `Addmission - ${this.edit_addmission.std_name} - ${this.edit_addmission.std_regist_no} `)
     adddata.append('std_id', this.edit_addmission.std_id)
 
     this.service.AddMoeny(adddata).subscribe(

@@ -47,7 +47,7 @@
 
 
         </div>
-        <button *ngIf="transactions.length >= 5" mat-raised-button color="primary" class="see-more-button"
+        <button *ngIf="transactions?.length >= 5" mat-raised-button color="primary" class="see-more-button"
             (click)="onSeeMore()">
             <mat-icon>expand_more</mat-icon>
             See More
