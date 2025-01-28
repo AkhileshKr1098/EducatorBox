@@ -11,19 +11,24 @@
     <mat-card class="transaction-list">
         <div *ngFor="let transaction of transactions" class="transaction-item">
             <!-- Symbol for Credit/Debit -->
-            <span class="symbol" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <span *ngIf="transaction.status == 1 || transaction.status == 0 " class="symbol"
+                [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
                 {{ !transaction.std_id ? '+' : '-' }}
+            </span>
+
+            <span *ngIf="transaction.status == 2" class="symbol" style="color: blue;">
+                X
             </span>
 
             <!-- Transaction Details -->
             <div class="details">
                 <p class="title">{{ transaction.title || 'No Title' }}</p>
                 <p class="subtitle">
-                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00' 
-                        ? (transaction.transaction_date | date: 'MMM d, y, h:mm a') 
-                        : 'Invalid Date' }}
-                  </p>
-                  
+                    {{ transaction.transaction_date && transaction.transaction_date !== '0000-00-00 00:00:00'
+                    ? (transaction.transaction_date | date: 'MMM d, y, h:mm a')
+                    : 'Invalid Date' }}
+                </p>
+
                 <p *ngIf="transaction.description" class="subtitle">
                     Description - {{transaction.description}}
                 </p>
@@ -41,7 +46,11 @@
 
             <!-- Amount -->
 
-            <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <p *ngIf="transaction.status == 1 || transaction.status == 0 " class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+                {{ transaction.amount | currency: 'INR' }}
+            </p>
+
+            <p *ngIf="transaction.status == 2" class="amount" style="color: blue;">
                 {{ transaction.amount | currency: 'INR' }}
             </p>
 

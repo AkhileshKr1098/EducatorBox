@@ -642,6 +642,9 @@ export class ManageService {
   getCenterList(id: number) {
     return this.http.get<any>(`${this.baseUrl}get_centerlist.php?inst_id=${id}`)
   }
+  getAmountmotherCenter(id: number) {
+    return this.http.get<any>(`${this.baseUrl}getAmountmotherCenter.php?inst_id=${id}`)
+  }
 
   addmissionFeeUpdate(data: any) {
     return this.http.post<any>(`${this.baseUrl}centerupdate.php`, data)

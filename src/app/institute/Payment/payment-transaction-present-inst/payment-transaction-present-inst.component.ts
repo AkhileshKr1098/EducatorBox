@@ -14,12 +14,14 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
   base_url: string = 'https://www.educatorbox.com/api/'
   transactions: any
   logindata = {
-    inst_id: '',
+    inst_id: 0,
     parent_center_id: '',
     addmission_fee: 0
   }
   getAddmissionStd = 0
   totalAmount: number = 0; // Example balance
+  CreditAmount: number = 0;
+  RefundAmount: number = 0;
 
   constructor(
     private _crud: ManageService,
@@ -33,9 +35,18 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
   }
   ngOnInit() {
     this.getWalletByReceiver()
-
+    this.getAmount()
   }
 
+  getAmount() {
+    this._crud.getAmountmotherCenter(this.logindata.inst_id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.CreditAmount = res.data.credit_amount
+        this.RefundAmount = res.data.refund_amount
+      })
+
+  }
 
   getWalletByReceiver() {
     this._crud.GetwalletByreceiverId(this.logindata.inst_id).subscribe(
@@ -56,6 +67,7 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog closed:', result);
       this.getWalletByReceiver()
+      this.getAmount()
     });
   }
 

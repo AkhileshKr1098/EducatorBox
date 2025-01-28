@@ -283,7 +283,7 @@ export class AddEditTakeAddmissionComponent implements OnInit {
     adddata.append('transaction_date', formattedDate)
     adddata.append('amount', `${this.logindata.addmission_fee}`)
     adddata.append('sender_institute_id_fk', this.logindata.inst_id)
-    adddata.append('receiver_institute_id_fk', this.logindata.parent_center_id)
+    adddata.append('receiver_institute_id_fk', `0`)
     adddata.append('status', '1')
     adddata.append('description', '')
     adddata.append('attachment', '')
