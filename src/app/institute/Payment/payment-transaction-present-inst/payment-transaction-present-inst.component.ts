@@ -86,6 +86,7 @@ export class PaymentTransactionPresentInstComponent implements OnInit {
           if (res.success == 1) {
             alert(`Amount ₹${amt} approved successfully!`);
             this.getWalletByReceiver()
+            this.getAmount()
           }
 
         }

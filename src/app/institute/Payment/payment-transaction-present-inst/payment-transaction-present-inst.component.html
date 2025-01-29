@@ -6,9 +6,10 @@
                 <h2 style="color: green;">Credit Amount</h2>
                 <h1>{{ CreditAmount | currency:'INR' }}</h1>
             </div>
-            <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add Money</button>
+            <button class="addMoney" (click)="openAddMoneyDialog()"><mat-icon> attach_money</mat-icon> Add
+                Money</button>
 
-            <div class="right" >
+            <div class="right">
                 <h2 style="color: red;">Refund Amount</h2>
                 <h1 style="color: red;">{{ RefundAmount | currency:'INR' }}</h1>
             </div>
@@ -21,14 +22,14 @@
     <mat-card class="transaction-list">
         <div *ngFor="let transaction of transactions" class="transaction-item">
             <!-- Symbol for Credit/Debit -->
-            <span *ngIf="transaction.status == 1 || transaction.status == 0 " class="symbol"
-                [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
-                {{ !transaction.std_id ? '+' : '-' }}
+           
+
+            <span  class="symbol"
+                [ngClass]="!transaction.description ? 'positive' : 'negative'">
+                {{ !transaction.description ? '+' : '-' }}
             </span>
 
-            <span *ngIf="transaction.status == 2" class="symbol" style="color: blue;">
-                X
-            </span>
+
             <!-- Transaction Details -->
             <div class="details">
                 <p class="title">{{ transaction.center_owner_name}} - {{ transaction.mobile_no }}</p>
@@ -45,26 +46,28 @@
                     Status - Pending
                 </p>
 
-                <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
-                    Status - Sucess
-                </p>
+                <span *ngIf="transaction.status != 0">
+                    <p class="subtitle" style="color: green;" *ngIf="!transaction.description">
+                        Status - Credit 
+                    </p>
 
-                <p class="subtitle" style="color: red;" *ngIf="transaction.status == 2">
-                    Status - Rejected
-                </p>
+                    <p class="subtitle" style="color: red;" *ngIf="transaction.description">
+                        Status - Refund
+                    </p>
+                </span>
+
+
                 <a *ngIf="transaction.attachment" target="_blank"
                     href="{{base_url+transaction.attachment}}">Attachment</a>
             </div>
 
             <!-- Amount -->
-            <p *ngIf="transaction.status == 1 || transaction.status == 0 " class="amount"
-                [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <p  class="amount"
+                [ngClass]="!transaction.description ? 'positive' : 'negative'">
                 {{ transaction.amount | currency: 'INR' }}
             </p>
 
-            <p *ngIf="transaction.status == 2" class="amount" style="color: blue;">
-                {{ transaction.amount | currency: 'INR' }}
-            </p>
+
             &nbsp; &nbsp; &nbsp;
 
             <div class="actionButton">

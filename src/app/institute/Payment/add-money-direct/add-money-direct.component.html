@@ -4,9 +4,17 @@
     <p>Please enter the required details to add money to your wallet.</p>
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>please selcet center</mat-label>
-        <mat-select (valueChange)="onSelectCenter($event)">
+        <mat-select (valueChange)="onSelectCenter($event)" >
             <mat-option *ngFor="let center of center_list" [value]="center.inst_id">{{center.inst_name}} -
                 {{center.center_code}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Please select a payment method</mat-label>
+        <mat-select (selectionChange)="onSelectPayment($event.value)">
+            <mat-option value="1">Credit Amount</mat-option>
+            <mat-option value="3">Refund Amount</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -20,7 +28,7 @@
         <input matInput type="tel" placeholder="Enter mobile number" [(ngModel)]="mobileno">
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline" class="full-width" *ngIf="paymentMethod">
         <mat-label><mat-icon>money</mat-icon> Description</mat-label>
         <input matInput type="text" placeholder="Enter description" [(ngModel)]="description">
     </mat-form-field>

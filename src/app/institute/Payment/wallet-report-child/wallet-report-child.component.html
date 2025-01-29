@@ -1,12 +1,25 @@
 <div class="wallet-container mat-elevation-z4">
 
+    <mat-card class="current-balance">
+        <h2>Wallet History</h2>
+
+        <button class="addMoney" routerLink="/institutehome/walletHistory">
+            Back</button>
+        <br>
+    </mat-card>
+
 
     <!-- Transaction History -->
     <mat-card class="transaction-list">
         <div *ngFor="let transaction of transactions" class="transaction-item">
             <!-- Symbol for Credit/Debit -->
-            <span class="symbol" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <span *ngIf="transaction.status == 1 || transaction.status == 0 " class="symbol"
+                [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
                 {{ !transaction.std_id ? '+' : '-' }}
+            </span>
+
+            <span *ngIf="transaction.status == 2" class="symbol" style="color: blue;">
+                X
             </span>
 
             <!-- Transaction Details -->
@@ -35,11 +48,19 @@
 
             <!-- Amount -->
 
-            <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <p *ngIf="transaction.status == 1 || transaction.status == 0 " class="amount"
+                [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
                 {{ transaction.amount | currency: 'INR' }}
             </p>
 
+            <p *ngIf="transaction.status == 2" class="amount" style="color: blue;">
+                {{ transaction.amount | currency: 'INR' }}
+            </p>
+
+
         </div>
+
     </mat-card>
+
 
 </div>

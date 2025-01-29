@@ -20,6 +20,7 @@ export class WalletReportPresentComponent implements OnInit {
   }
   getAddmissionStd = 0
   totalAmount: number = 0; // Example balance
+  RefundAmount: number = 0;
 
   constructor(
     private _crud: ManageService,

@@ -1,12 +1,21 @@
 <div class="wallet-container mat-elevation-z4">
+    <!-- Current Balance -->
+    <mat-card class="current-balance">
+        <button routerLink="/institutehome/paymenttransactionlist" mat-button color="warn">Back </button>
+
+
+    </mat-card>
 
     <!-- Transaction History -->
     <mat-card class="transaction-list">
         <div *ngFor="let transaction of transactions" class="transaction-item">
             <!-- Symbol for Credit/Debit -->
-            <span class="symbol" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
-                {{ !transaction.std_id ? '+' : '-' }}
+
+
+            <span class="symbol" [ngClass]="!transaction.description ? 'positive' : 'negative'">
+                {{ !transaction.description ? '+' : '-' }}
             </span>
+
 
             <!-- Transaction Details -->
             <div class="details">
@@ -24,22 +33,27 @@
                     Status - Pending
                 </p>
 
-                <p class="subtitle" style="color: green;" *ngIf="transaction.status == 1">
-                    Status - Sucess
-                </p>
+                <span *ngIf="transaction.status != 0">
+                    <p class="subtitle" style="color: green;" *ngIf="!transaction.description">
+                        Status - Credit
+                    </p>
 
-                <p class="subtitle" style="color: red;" *ngIf="transaction.status == 2">
-                    Status - Rejected
-                </p>
+                    <p class="subtitle" style="color: red;" *ngIf="transaction.description">
+                        Status - Refund
+                    </p>
+                </span>
+
+
                 <a *ngIf="transaction.attachment" target="_blank"
                     href="{{base_url+transaction.attachment}}">Attachment</a>
             </div>
 
             <!-- Amount -->
-
-            <p class="amount" [ngClass]="!transaction.std_id ? 'positive' : 'negative'">
+            <p class="amount" [ngClass]="!transaction.description ? 'positive' : 'negative'">
                 {{ transaction.amount | currency: 'INR' }}
             </p>
+
+
             &nbsp; &nbsp; &nbsp;
 
             <div class="actionButton">
@@ -54,11 +68,7 @@
 
 
         </div>
-        <button *ngIf="transactions.length >= 5" mat-raised-button color="primary" class="see-more-button"
-            (click)="onSeeMore()">
-            <mat-icon>expand_more</mat-icon>
-            See More
-        </button>
+
     </mat-card>
 
 

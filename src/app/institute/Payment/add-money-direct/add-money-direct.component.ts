@@ -23,6 +23,7 @@ export class AddMoneyDirectComponent implements OnInit {
     center_code: ''
   }
   center_list: any
+  paymentMethod: boolean = false
   ngOnInit(): void {
     this.getCenterList()
   }
@@ -48,42 +49,59 @@ export class AddMoneyDirectComponent implements OnInit {
 
   onAdd() {
     console.log(this.logindata.center_code);
-    if (this.ownername == "" || this.mobileno == '' || this.center_id == 0) {
-      console.log('please fill required fildes')
-    } else {
+  
+    // Validate required fields
+    if (!this.ownername || !this.mobileno || !this.center_id) {
+      console.log('Please fill in required fields');
+      alert('Please fill in required fields');
 
-      const currentDate = new Date();
-      const formattedDate = this.formatDate(currentDate);
-      const adddata = new FormData()
-      console.log(formattedDate);
-      
-      adddata.append(`transaction_date`, formattedDate)
-      adddata.append('amount', `${this.amount}`)
-      adddata.append('sender_institute_id_fk', `${this.center_id}`)
-      adddata.append('center_code', this.center_code);
-      adddata.append('receiver_institute_id_fk', `${this.logindata.inst_id}`)
-      adddata.append('status', '1')
-      adddata.append('description', this.description)
-      adddata.append('attachment', '')
-      adddata.append('center_owner_name', this.ownername)
-      adddata.append('mobile_no', this.mobileno)
-      adddata.append('title', 'Payment Create By Sankalp EDU')
-      adddata.append('std_id', '')
-
-      this._crud.AddMoeny(adddata).subscribe(
-        (res: any) => {
-          console.log(res);
-
-          if (res.success == 1) {
-            console.log('Money added successfully!');
-            this.dialogRef.close(1);
-          }
-        }
-      )
-
+      return;
     }
-
+  
+    // Check payment method and description validation
+    if (this.paymentMethod) {
+      if (!this.description) {
+        alert('Please add a description if you selected money return');
+        return;
+      }
+    }
+  
+    // Prepare transaction data
+    const currentDate = new Date();
+    const formattedDate = this.formatDate(currentDate);
+    const adddata = new FormData();
+  
+    adddata.append('transaction_date', formattedDate);
+    adddata.append('amount', `${this.amount}`);
+    adddata.append('sender_institute_id_fk', `${this.center_id}`);
+    adddata.append('center_code', this.center_code);
+    adddata.append('receiver_institute_id_fk', `${this.logindata.inst_id}`);
+    adddata.append('status', '1');
+    adddata.append('description', this.description);
+    adddata.append('attachment', '');
+    adddata.append('center_owner_name', this.ownername);
+    adddata.append('mobile_no', this.mobileno);
+    adddata.append('title', 'Payment Created By Sankalp EDU');
+    adddata.append('std_id', '');
+  
+    console.log('Sending Data:', adddata);
+  
+    // API call to add money
+    this._crud.AddMoeny(adddata).subscribe(
+      (res: any) => {
+        console.log('API Response:', res);
+  
+        if (res.success == 1) {
+          console.log('Money added successfully!');
+          this.dialogRef.close(1);
+        }
+      },
+      (error) => {
+        console.error('Error adding money:', error);
+      }
+    );
   }
+  
 
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -104,6 +122,14 @@ export class AddMoneyDirectComponent implements OnInit {
     this.center_id = centerdata[0].inst_id
   }
 
+  onSelectPayment(event: any) {
+    console.log(event)
+    if (event == 3) {
+      this.paymentMethod = true
+    } else {
+      this.paymentMethod = false
+    }
+  }
 
 
 
