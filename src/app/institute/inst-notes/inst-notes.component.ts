@@ -19,7 +19,7 @@ export class InstNotesComponent implements OnInit {
   count_inst_notes: number = 0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  imgUrl: string = 'https://educatorbox.com/assets/';
+  imgUrl: string = 'https://cms.sankalpcomputer.com/assets/';
   login_deatils: any
   login: any
   inst_id: any

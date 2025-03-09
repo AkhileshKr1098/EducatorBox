@@ -13,7 +13,7 @@ export class ManageService {
   loginValid = new BehaviorSubject(false)
   // certificateLogin = new BehaviorSubject(false)
 
-  baseUrl: string = 'https://educatorbox.com/api/';
+  baseUrl: string = 'https://cms.sankalpcomputer.com/api/';
 
   // dashboard 
   get_dashboad(data: any) {
