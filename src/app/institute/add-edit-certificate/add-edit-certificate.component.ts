@@ -32,7 +32,7 @@ export class AddEditCertificateComponent implements OnInit {
   block_data:any
   panchayat_data:any
   // for new docment  
-  url:string = 'https://educatorbox.com/assets/certificate/'
+  url:string = 'https://cms.sankalpcomputer.com/assets/certificate/'
   aadhar_url:any = "assets/doc.png"
   aadhar_select:any
 
